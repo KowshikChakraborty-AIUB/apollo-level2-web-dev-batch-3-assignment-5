@@ -30,7 +30,7 @@ const Navbar = () => {
     return (
         <div>
             <div className="flex justify-center items-center">
-                <div className="navbar bg-purple-200">
+                <div className="navbar bg-purple-200 px-10">
                     <div className="navbar-start">
                         <div className="dropdown">
                             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -53,9 +53,10 @@ const Navbar = () => {
                                 {navLinks}
                             </ul>
                         </div>
-                        <a className="text-2xl font-bold text-purple-700">MeetRoomHub.com</a>
+                        <img className="w-10 h-10 rounded-full" src="/src/assets/404.JPG" alt="" />
+                        <a className="ml-2 text-2xl font-bold text-purple-700">MeetRoomHub.com</a>
                     </div>
-                    <div className="navbar-center ml-20 hidden lg:flex">
+                    <div className="navbar-center ml-11 hidden lg:flex">
                         <ul className="menu menu-horizontal px-1">
                             {navLinks}
                         </ul>
