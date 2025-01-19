@@ -1,7 +1,11 @@
+import Hero from "@/components/hero/Hero"
+import ServiceAdvertisement from "@/components/serviceAdvertisement/ServiceAdvertisement"
+
 const home = () => {
   return (
     <div>
-      <p>This is home</p>
+      <Hero/>
+      <ServiceAdvertisement/>
     </div>
   )
 }
