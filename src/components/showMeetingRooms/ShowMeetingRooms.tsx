@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
     Card,
     CardContent,
@@ -7,7 +8,7 @@ import {
 import { Button } from "../ui/button"
 import { Link } from "react-router-dom"
 
-const ShowMeetingRooms = ({ item }) => {
+const ShowMeetingRooms: React.FC<any> = ({ item }) => {
 
     const { _id, name, capacity, pricePerSlot } = item
 

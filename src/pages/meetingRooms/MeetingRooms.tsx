@@ -1,18 +1,9 @@
 import ShowMeetingRooms from "@/components/showMeetingRooms/ShowMeetingRooms"
 import { useGetAllRoomsQuery } from "@/redux/api/roomsApi/roomsApi"
+import { TRoomData } from "@/types/roomsTypes"
 
 const MeetingRooms = () => {
     const { data: roomData, isLoading } = useGetAllRoomsQuery({})
-
-    type roomDataType = {
-        name: string,
-        roomNo: number,
-        floorNo: number,
-        capacity: number,
-        pricePerSlot: number,
-        amenities: string[],
-    }
-
 
 
     if (isLoading) {
@@ -35,7 +26,7 @@ const MeetingRooms = () => {
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3 my-6">
                 {
-                    roomData.data.map((item: roomDataType, idx: number) => <ShowMeetingRooms item={item} key={idx}></ShowMeetingRooms>)
+                    roomData.data.map((item: TRoomData, idx: number) => <ShowMeetingRooms item={item} key={idx}></ShowMeetingRooms>)
                 }
             </div>
         </div>

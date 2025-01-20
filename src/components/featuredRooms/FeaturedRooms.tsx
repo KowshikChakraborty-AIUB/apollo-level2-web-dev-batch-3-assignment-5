@@ -2,6 +2,7 @@ import { useGetAllRoomsQuery } from "@/redux/api/roomsApi/roomsApi"
 import ShowMeetingRooms from "../showMeetingRooms/ShowMeetingRooms"
 import { Button } from "../ui/button"
 import { Link } from "react-router-dom"
+import { TRoomData } from "@/types/roomsTypes"
 
 const FeaturedRooms = () => {
     const { data: roomData, isLoading } = useGetAllRoomsQuery({})
@@ -26,7 +27,7 @@ const FeaturedRooms = () => {
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                 {
-                    roomData.data.slice(0, 4).map((item, idx: number) => <ShowMeetingRooms item={item} key={idx}></ShowMeetingRooms>)
+                    roomData.data.slice(0, 4).map((item: TRoomData, idx: number) => <ShowMeetingRooms item={item} key={idx}></ShowMeetingRooms>)
                 }
             </div>
             <div className="text-center my-4">
