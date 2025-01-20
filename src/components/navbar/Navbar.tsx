@@ -53,7 +53,7 @@ const Navbar = () => {
                                 {navLinks}
                             </ul>
                         </div>
-                        <img className="w-10 h-10 rounded-full" src="/src/assets/404.JPG" alt="" />
+                        <img className="w-10 h-10 rounded-full" src="https://i.ibb.co.com/8B3yW05/Meet-Room-Hub-Logo.jpg" alt="" />
                         <a className="ml-2 text-2xl font-bold text-purple-700">MeetRoomHub.com</a>
                     </div>
                     <div className="navbar-center ml-11 hidden lg:flex">

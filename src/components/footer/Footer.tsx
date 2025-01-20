@@ -4,7 +4,7 @@ const Footer = () => {
             <footer className="footer bg-purple-200 text-base-content p-10">
                 <aside>
                     <div className="flex gap-2">
-                        <img className="w-10 h-10 rounded-full" src="/src/assets/404.JPG" alt="" />
+                        <img className="w-10 h-10 rounded-full" src="https://i.ibb.co.com/8B3yW05/Meet-Room-Hub-Logo.jpg" alt="" />
                         <p className="text-2xl font-bold text-purple-700">
                             MeetRoomHub.com
                         </p>
