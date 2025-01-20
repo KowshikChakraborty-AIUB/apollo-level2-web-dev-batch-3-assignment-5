@@ -9,11 +9,10 @@ const ErrorPage = () => {
           <Link to={'/'} className="flex justify-center">
             <img src='/src/assets/404.JPG' alt="" />
           </Link>
-          <div className="flex justify-center my-5 gap-7">
+          <div className="my-10 text-center">
             <Link to={'/'}>
-              <Button className="text-center bg-yellow-400 text-black hover:bg-yellow-500">Got to Home</Button>
+              <Button className="bg-yellow-400 text-black hover:bg-yellow-500 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300">Go to Home</Button>
             </Link>
-            <Button className="text-center bg-yellow-400 text-black hover:bg-yellow-500">Got to Login</Button>
           </div>
         </div>
       </div>
