@@ -4,12 +4,13 @@ import {
     CardHeader,
     CardTitle,
 } from "@/components/ui/card"
+import { Button } from "../ui/button"
 
 const ShowMeetingRooms = ({ item }) => {
 
-    const { name, roomNo, floorNo, capacity, pricePerSlot, amenities } = item
+    const { name, capacity, pricePerSlot } = item
 
-    const extractAmenitiesFromArray = amenities.join(', ')
+    //const extractAmenitiesFromArray = amenities.join(', ')
 
     return (
         <div>
@@ -22,11 +23,9 @@ const ShowMeetingRooms = ({ item }) => {
                         </div>
                     </CardHeader>
                     <CardContent>
-                        <p className="text-justify font-bold text-base">Room No: {roomNo}</p>
-                        <p className="text-justify font-bold text-base">Floor No: {floorNo}</p>
                         <p className="text-justify font-bold text-base">Capacity: {capacity}</p>
-                        <p className="text-justify font-bold text-base">Amenities: {extractAmenitiesFromArray}</p>
                         <p className="text-justify font-bold text-base">Price Per Slot: {pricePerSlot} TK.</p>
+                        <Button className="mt-4 text-center bg-yellow-400 text-black hover:bg-yellow-500 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300">See Details</Button>
                     </CardContent>
                 </Card>
             </div>
