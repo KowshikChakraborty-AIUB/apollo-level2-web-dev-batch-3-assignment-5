@@ -17,14 +17,22 @@ import {
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { Button } from "../ui/button"
-import { useAppSelector } from "@/redux/hook"
+import { useAppDispatch, useAppSelector } from "@/redux/hook"
 import tokenVerification from "@/utils/tokenVerification"
+import { toast } from "react-toastify"
+import { logOut } from "@/redux/features/authSlice/authSlice"
 
 const Navbar = () => {
 
     const token = useAppSelector((state) => state.auth.token);
+    const dispatch = useAppDispatch();
 
     const user = token ? tokenVerification(token) : null;
+
+    const handleLogout = () => {
+        dispatch(logOut());
+        toast.success("User Logged Out Successfully");
+    };
 
     const navLinks =
         <>
@@ -100,10 +108,12 @@ const Navbar = () => {
                                                 <span>Support</span>
                                             </DropdownMenuItem>
                                             <DropdownMenuSeparator />
-                                            <DropdownMenuItem>
-                                                <LogOut />
-                                                <span>Log out</span>
-                                            </DropdownMenuItem>
+                                            <Link to={'/login'} onClick={handleLogout}>
+                                                <DropdownMenuItem className="cursor-pointer">
+                                                    <LogOut />
+                                                    <span>Log out</span>
+                                                </DropdownMenuItem>
+                                            </Link>
                                         </DropdownMenuContent>
                                     </DropdownMenu>
                                 </div>
