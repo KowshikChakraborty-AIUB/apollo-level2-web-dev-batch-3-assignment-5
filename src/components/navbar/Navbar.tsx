@@ -16,8 +16,15 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import { Button } from "../ui/button"
+import { useAppSelector } from "@/redux/hook"
+import tokenVerification from "@/utils/tokenVerification"
 
 const Navbar = () => {
+
+    const token = useAppSelector((state) => state.auth.token);
+
+    const user = token ? tokenVerification(token) : null;
 
     const navLinks =
         <>
@@ -62,41 +69,52 @@ const Navbar = () => {
                         </ul>
                     </div>
                     <div className="navbar-end">
-                        <div>
-                            <DropdownMenu>
-                                <DropdownMenuTrigger asChild>
-                                    <div>
-                                        <img className="w-10 h-10 cursor-pointer rounded-full" src="/src/assets/404.JPG" alt="" />
-                                    </div>
-                                </DropdownMenuTrigger>
-                                <DropdownMenuContent className="w-56">
-                                    <DropdownMenuLabel>My Account</DropdownMenuLabel>
-                                    <DropdownMenuSeparator />
-                                    <DropdownMenuGroup>
-                                        <DropdownMenuItem>
-                                            <User />
-                                            <span>My Bookings</span>
-                                        </DropdownMenuItem>
-                                        <DropdownMenuItem>
-                                            <LayoutDashboardIcon />
-                                            <Link to={'/kowshik'}>
-                                                <span>Dashboard</span>
-                                            </Link>
-                                        </DropdownMenuItem>
-                                    </DropdownMenuGroup>
-                                    <DropdownMenuSeparator />
-                                    <DropdownMenuItem>
-                                        <LifeBuoy />
-                                        <span>Support</span>
-                                    </DropdownMenuItem>
-                                    <DropdownMenuSeparator />
-                                    <DropdownMenuItem>
-                                        <LogOut />
-                                        <span>Log out</span>
-                                    </DropdownMenuItem>
-                                </DropdownMenuContent>
-                            </DropdownMenu>
-                        </div>
+                        {
+                            user ?
+
+                                <div>
+                                    <DropdownMenu>
+                                        <DropdownMenuTrigger asChild>
+                                            <div>
+                                                <img className="w-10 h-10 cursor-pointer rounded-full" src="/src/assets/404.JPG" alt="" />
+                                            </div>
+                                        </DropdownMenuTrigger>
+                                        <DropdownMenuContent className="w-56">
+                                            <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                                            <DropdownMenuSeparator />
+                                            <DropdownMenuGroup>
+                                                <DropdownMenuItem>
+                                                    <User />
+                                                    <span>My Bookings</span>
+                                                </DropdownMenuItem>
+                                                <DropdownMenuItem>
+                                                    <LayoutDashboardIcon />
+                                                    <Link to={'/kowshik'}>
+                                                        <span>Dashboard</span>
+                                                    </Link>
+                                                </DropdownMenuItem>
+                                            </DropdownMenuGroup>
+                                            <DropdownMenuSeparator />
+                                            <DropdownMenuItem>
+                                                <LifeBuoy />
+                                                <span>Support</span>
+                                            </DropdownMenuItem>
+                                            <DropdownMenuSeparator />
+                                            <DropdownMenuItem>
+                                                <LogOut />
+                                                <span>Log out</span>
+                                            </DropdownMenuItem>
+                                        </DropdownMenuContent>
+                                    </DropdownMenu>
+                                </div>
+
+                                :
+
+                                <Link to={'/login'}>
+                                    <Button className="text-center bg-yellow-400 text-black hover:bg-yellow-500 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300">Login</Button>
+                                </Link>
+
+                        }
                     </div>
                 </div>
             </div>

@@ -6,6 +6,7 @@ import MeetingRooms from "@/pages/meetingRooms/MeetingRooms";
 import AboutUs from "@/pages/aboutUs/AboutUs";
 import ContactUs from "@/pages/contactUs/ContactUs";
 import SingleRoomDetails from "@/pages/singleRoomDetails/SingleRoomDetails";
+import Login from "@/pages/login/Login";
 
 const router = createBrowserRouter([{
     path: '/',
@@ -31,6 +32,10 @@ const router = createBrowserRouter([{
         {
             path: '/contactUs',
             element: <ContactUs/>
+        },
+        {
+            path: '/login',
+            element: <Login/>
         }
     ]
 }])
