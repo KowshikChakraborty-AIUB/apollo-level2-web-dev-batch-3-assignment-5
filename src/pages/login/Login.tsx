@@ -66,44 +66,55 @@ const Login = () => {
 
     return (
         <div>
-            <div className="w-1/2 mx-auto">
-                <Form {...form}>
-                    <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-                        <FormField
-                            control={form.control}
-                            name="email"
-                            render={({ field }) => (
-                                <FormItem>
-                                    <FormLabel>Username</FormLabel>
-                                    <FormControl>
-                                        <Input placeholder="shadcn" {...field} />
-                                    </FormControl>
-                                    <FormDescription>
-                                        This is your public display name.
-                                    </FormDescription>
-                                    <FormMessage />
-                                </FormItem>
-                            )}
-                        />
-                        <FormField
-                            control={form.control}
-                            name="password"
-                            render={({ field }) => (
-                                <FormItem>
-                                    <FormLabel>Password</FormLabel>
-                                    <FormControl>
-                                        <Input type="password" placeholder="shadcn" {...field} />
-                                    </FormControl>
-                                    <FormDescription>
-                                        This is your public display name.
-                                    </FormDescription>
-                                    <FormMessage />
-                                </FormItem>
-                            )}
-                        />
-                        <Button type="submit">Submit</Button>
-                    </form>
-                </Form>
+            <div>
+                <p className="my-3 text-4xl font-bold text-center">Login and Book Rooms</p>
+                <div className="flex justify-center">
+                    <div className="w-96 text-center rounded-md h-[5px] bg-purple-400"></div>
+                </div>
+            </div>
+            <div className="w-3/5 my-10 mx-auto flex justify-between items-center  gap-10 bg-purple-200 px-6 py-6 rounded-md">
+                <div className="hidden md:hidden lg:block w-3/5 ">
+                    <img src="https://i.ibb.co.com/p26Mxc9/Login-pic.jpg" alt="" />
+                </div>
+                <div className="w-full md:full lg:w-1/2">
+                    <Form {...form}>
+                        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+                            <FormField
+                                control={form.control}
+                                name="email"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel>Email</FormLabel>
+                                        <FormControl>
+                                            <Input placeholder="Your Email" {...field} />
+                                        </FormControl>
+                                        <FormDescription>
+                                            Type your Email Address.
+                                        </FormDescription>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+                            <FormField
+                                control={form.control}
+                                name="password"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel>Password</FormLabel>
+                                        <FormControl>
+                                            <Input type="password" placeholder="Your Password" {...field} />
+                                        </FormControl>
+                                        <FormDescription>
+                                            Type Your Password.
+                                        </FormDescription>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+                            <Button type="submit" className="text-center bg-yellow-400 text-black hover:bg-yellow-500 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300">Login</Button>
+                        </form>
+                    </Form>
+                </div>
             </div>
         </div>
     );
