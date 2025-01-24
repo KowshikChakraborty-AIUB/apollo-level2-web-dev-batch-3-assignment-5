@@ -14,8 +14,19 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import signUpValidationSchema from "@/validationSchema/signUpValidationSchema";
+import { useSignUpMutation } from "@/redux/api/authApi/authApi";
+import tokenVerification from "@/utils/tokenVerification";
+import { useAppDispatch } from "@/redux/hook";
+import { setUser } from "@/redux/features/authSlice/authSlice";
+import { useLocation, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const SignUp = () => {
+
+    const [signUp, { isLoading }] = useSignUpMutation();
+    const dispatch = useAppDispatch();
+    const location = useLocation();
+    const navigate = useNavigate();
 
     const form = useForm<z.infer<typeof signUpValidationSchema>>({
         resolver: zodResolver(signUpValidationSchema),
@@ -23,14 +34,40 @@ const SignUp = () => {
             name: "",
             email: "",
             password: "",
-            phoneNumber: "",
-            address: ""
+            phone: "",
+            address: "",
+            role: 'user'
         },
     })
 
     const onSubmit = async (values: z.infer<typeof signUpValidationSchema>) => {
-        console.log(values);
 
+        if (isLoading) {
+            return (
+                <>
+                    <div className="flex items-center justify-center">
+                        <p className="ftext-5xl font-bold">Loading...</p>
+                    </div>
+                </>
+            )
+        }
+
+        try {
+            const res: any = await signUp(values);
+            
+            if (res?.data?.success) {
+                const token = res?.data?.token;
+                const user = tokenVerification(token);
+                dispatch(setUser({ user, token }));
+                navigate(location?.state ? location.state : '/', { replace: true });
+                toast.success(res?.data?.message);
+            }
+            if (res?.error) {
+                toast.error(res?.error?.message || res?.error?.data?.message || res?.data?.message);
+            }
+        } catch (error: any) {
+            toast.error(error?.message);
+        }
     }
 
     return (
@@ -45,7 +82,7 @@ const SignUp = () => {
                 <div className="w-4/5 mx-auto">
                     <Form {...form}>
                         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-                        <FormField
+                            <FormField
                                 control={form.control}
                                 name="name"
                                 render={({ field }) => (
@@ -95,7 +132,7 @@ const SignUp = () => {
                             />
                             <FormField
                                 control={form.control}
-                                name="phoneNumber"
+                                name="phone"
                                 render={({ field }) => (
                                     <FormItem>
                                         <FormLabel>Phone Number</FormLabel>

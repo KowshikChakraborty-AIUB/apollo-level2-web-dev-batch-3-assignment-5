@@ -12,6 +12,16 @@ const authApi = baseApi.injectEndpoints({
             },
         }),
 
+        signUp: builder.mutation({
+            query: (data) => {
+                return {
+                    url: "/api/auth/signup",
+                    method: "POST",
+                    body: data,
+                };
+            },
+        }),
+
         // getAllUser: builder.query({
         //     query: (args: { search?: string; sort: string }) => {
         //         const params = new URLSearchParams();
@@ -47,7 +57,6 @@ const authApi = baseApi.injectEndpoints({
 });
 
 export const {
-    //useGetAllUserQuery,
     useLogInMutation,
-    //useGetOneUserQuery,
+    useSignUpMutation,
 } = authApi;
