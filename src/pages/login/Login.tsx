@@ -17,7 +17,7 @@ import { Input } from "@/components/ui/input"
 import { useLogInMutation } from "@/redux/api/authApi/authApi";
 import tokenVerification from "@/utils/tokenVerification";
 import { useAppDispatch } from "@/redux/hook";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { setUser } from "@/redux/features/authSlice/authSlice";
 import { toast } from "react-toastify";
 
@@ -114,6 +114,7 @@ const Login = () => {
                             <Button type="submit" className="text-center bg-yellow-400 text-black hover:bg-yellow-500 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300">Login</Button>
                         </form>
                     </Form>
+                    <p className="mt-2 text-base font-bold">Don't have an account? <Link to={'/signUp'} className="text-purple-700">Sign Up</Link></p>
                 </div>
             </div>
         </div>

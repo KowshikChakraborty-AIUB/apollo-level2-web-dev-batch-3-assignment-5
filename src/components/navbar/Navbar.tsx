@@ -120,9 +120,14 @@ const Navbar = () => {
 
                                 :
 
-                                <Link to={'/login'}>
-                                    <Button className="text-center bg-yellow-400 text-black hover:bg-yellow-500 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300">Login</Button>
-                                </Link>
+                                <div>
+                                    <Link to={'/login'} className="mr-6">
+                                        <Button className="text-center bg-yellow-400 text-black hover:bg-yellow-500 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300">Login</Button>
+                                    </Link>
+                                    <Link to={'/signUp'}>
+                                        <Button className="text-center bg-yellow-400 text-black hover:bg-yellow-500 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300">Sign Up</Button>
+                                    </Link>
+                                </div>
 
                         }
                     </div>
