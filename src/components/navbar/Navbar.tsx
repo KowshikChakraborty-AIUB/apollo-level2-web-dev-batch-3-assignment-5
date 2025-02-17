@@ -21,6 +21,7 @@ import { useAppDispatch, useAppSelector } from "@/redux/hook"
 import tokenVerification from "@/utils/tokenVerification"
 import { toast } from "react-toastify"
 import { logOut } from "@/redux/features/authSlice/authSlice"
+import { useGetUserByEmailIdQuery } from "@/redux/api/authApi/authApi"
 
 const Navbar = () => {
 
@@ -29,6 +30,13 @@ const Navbar = () => {
 
     const user = token ? tokenVerification(token) : null;
 
+    const userDataFromState = useAppSelector((state) => state.auth.user);
+
+    console.log(userDataFromState);
+    
+
+    const { data: userData } = useGetUserByEmailIdQuery(userDataFromState?.userEmail || '');
+
     const handleLogout = () => {
         dispatch(logOut());
         toast.success("User Logged Out Successfully");
@@ -36,16 +44,16 @@ const Navbar = () => {
 
     const navLinks =
         <>
-            <NavLink to={'/'}><li className="font-bold hover:bg-purple-700 hover:text-yellow-400 hover: px-3 hover: py-3 hover:rounded"><a>Home</a></li></NavLink>
-            <NavLink to={'/meetingRooms'}><li className="font-bold hover:bg-purple-700 hover:text-yellow-400 hover: px-3 hover: py-3 hover:rounded"><a>Meeting Rooms</a></li></NavLink>
-            <NavLink to={'/aboutUs'}><li className="font-bold hover:bg-purple-700 hover:text-yellow-400 hover: px-3 hover: py-3 hover:rounded"><a>About Us</a></li></NavLink>
-            <NavLink to={'/contactUs'}><li className="font-bold hover:bg-purple-700 hover:text-yellow-400 hover: px-3 hover: py-3 hover:rounded"><a>Contact Us</a></li></NavLink>
+            <NavLink to={'/'}><li className="font-bold hover:bg-purple-700 hover:text-yellow-400 hover:rounded"><a>Home</a></li></NavLink>
+            <NavLink to={'/meetingRooms'}><li className="font-bold hover:bg-purple-700 hover:text-yellow-400 hover:rounded"><a>Meeting Rooms</a></li></NavLink>
+            <NavLink to={'/aboutUs'}><li className="font-bold hover:bg-purple-700 hover:text-yellow-400 hover:rounded"><a>About Us</a></li></NavLink>
+            <NavLink to={'/contactUs'}><li className="font-bold hover:bg-purple-700 hover:text-yellow-400 hover:rounded"><a>Contact Us</a></li></NavLink>
         </>
 
     return (
         <div>
             <div className="flex justify-center items-center">
-                <div className="navbar bg-purple-200 px-10">
+                <div className="navbar bg-purple-200 px-0 md:px-10">
                     <div className="navbar-start">
                         <div className="dropdown">
                             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -84,7 +92,7 @@ const Navbar = () => {
                                     <DropdownMenu>
                                         <DropdownMenuTrigger asChild>
                                             <div>
-                                                <img className="w-10 h-10 cursor-pointer rounded-full" src="/src/assets/404.JPG" alt="" />
+                                                <img className={userData?.data?.profileImg ? 'cursor-pointer rounded-full w-14 h-14' : 'bg-white cursor-pointer rounded-full w-14 h-14'} src={userData?.data?.profileImg ? userData?.data?.profileImg : 'https://i.ibb.co.com/p4xjpjk/user-default.png'} alt="User Image" />
                                             </div>
                                         </DropdownMenuTrigger>
                                         <DropdownMenuContent className="w-56">
@@ -120,11 +128,11 @@ const Navbar = () => {
 
                                 :
 
-                                <div>
-                                    <Link to={'/login'} className="mr-6">
+                                <div className="flex gap-6">
+                                    <Link to={'/login'}>
                                         <Button className="text-center bg-yellow-400 text-black hover:bg-yellow-500 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300">Login</Button>
                                     </Link>
-                                    <Link to={'/signUp'}>
+                                    <Link to={'/signUp'} className="hidden md:block">
                                         <Button className="text-center bg-yellow-400 text-black hover:bg-yellow-500 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300">Sign Up</Button>
                                     </Link>
                                 </div>

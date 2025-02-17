@@ -20,6 +20,7 @@ import { useAppDispatch } from "@/redux/hook";
 import { setUser } from "@/redux/features/authSlice/authSlice";
 import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { imgBBUploadImage } from "@/utils/imgbbUploadImage";
 
 const SignUp = () => {
 
@@ -35,12 +36,22 @@ const SignUp = () => {
             email: "",
             password: "",
             phone: "",
+            profileImg: "",
             address: "",
             role: 'user'
         },
     })
 
     const onSubmit = async (values: z.infer<typeof signUpValidationSchema>) => {
+
+        //Uploading image to imgbb
+        const inputElement = document.querySelector('input[type="file"]') as HTMLInputElement;
+        const file = inputElement?.files?.[0];
+
+        const img = file ? await imgBBUploadImage(file) : undefined
+
+        //setting generated imgbb link to form value
+        values.profileImg = img
 
         if (isLoading) {
             return (
@@ -54,7 +65,7 @@ const SignUp = () => {
 
         try {
             const res: any = await signUp(values);
-            
+
             if (res?.data?.success) {
                 const token = res?.data?.token;
                 const user = tokenVerification(token);
@@ -141,6 +152,22 @@ const SignUp = () => {
                                         </FormControl>
                                         <FormDescription>
                                             Type Your Phone Number.
+                                        </FormDescription>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+                            <FormField
+                                control={form.control}
+                                name="profileImg"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel>Profile Picture (Optional)</FormLabel>
+                                        <FormControl>
+                                            <Input type="file" placeholder="Your Profile Image" {...field} />
+                                        </FormControl>
+                                        <FormDescription>
+                                            Upload Your Profile Image.
                                         </FormDescription>
                                         <FormMessage />
                                     </FormItem>
