@@ -53,10 +53,21 @@ const authApi = baseApi.injectEndpoints({
         //     },
         //     providesTags: ["users"],
         // }),
+
+        getUserByEmailId: builder.query({
+            query: (email: string) => {
+                return {
+                    url: `api/auth/userInfoByEmail/${email}`,
+                    method: "GET",
+                };
+            },
+            providesTags: ["users"],
+        }),
     }),
 });
 
 export const {
     useLogInMutation,
     useSignUpMutation,
+    useGetUserByEmailIdQuery
 } = authApi;
