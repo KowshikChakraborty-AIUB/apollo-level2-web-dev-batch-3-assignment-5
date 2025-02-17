@@ -33,7 +33,7 @@ const Navbar = () => {
     const userDataFromState = useAppSelector((state) => state.auth.user);
 
     console.log(userDataFromState);
-    
+
 
     const { data: userData } = useGetUserByEmailIdQuery(userDataFromState?.userEmail || '');
 
@@ -101,7 +101,9 @@ const Navbar = () => {
                                             <DropdownMenuGroup>
                                                 <DropdownMenuItem>
                                                     <User />
-                                                    <span>My Bookings</span>
+                                                    <Link to={'/userProfile'}>
+                                                        <span>Profile</span>
+                                                    </Link>
                                                 </DropdownMenuItem>
                                                 <DropdownMenuItem>
                                                     <LayoutDashboardIcon />

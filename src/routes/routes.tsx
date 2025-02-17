@@ -8,6 +8,7 @@ import ContactUs from "@/pages/contactUs/ContactUs";
 import SingleRoomDetails from "@/pages/singleRoomDetails/SingleRoomDetails";
 import Login from "@/pages/login/Login";
 import SignUp from "@/pages/signUp/SignUp";
+import MyProfile from "@/pages/myProfile/MyProfile";
 
 const router = createBrowserRouter([{
     path: '/',
@@ -41,6 +42,10 @@ const router = createBrowserRouter([{
         {
             path: '/signUp',
             element: <SignUp/>
+        },
+        {
+            path: '/userProfile',
+            element: <MyProfile/>
         }
     ]
 }])
