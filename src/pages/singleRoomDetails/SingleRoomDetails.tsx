@@ -9,7 +9,7 @@ import "react-day-picker/dist/style.css";
 
 const SingleRoomDetails = () => {
     const params = useParams();
-    console.log(params);
+    //console.log(params);
 
 
     const { data: singleRoomData, isLoading } = useGetSingleRoomQuery(params?.id);
@@ -17,7 +17,16 @@ const SingleRoomDetails = () => {
     const { data: slotsData } = useGetAvailableSlotsQuery({});
 
     const [selectedDate, setSelectedDate] = useState<Date | undefined>();
-    const [availableTimes, setAvailableTimes] = useState<string[]>([]);
+    const [availableTimes, setAvailableTimes] = useState<any[]>([]);
+    const [selectedTimeSlotsId, setSelectedTimeSlotsId] = useState<any[]>([]);
+
+    const filteredSlotsTimeToShowUser = slotsData?.data?.filter((slot: any) => selectedTimeSlotsId.includes(slot._id));
+    const slotsTimeToShowUser = filteredSlotsTimeToShowUser?.map((slot: any) => `${slot.startTime} - ${slot.endTime}`).join(", ");
+
+    console.log(selectedDate);
+    console.log(selectedTimeSlotsId);
+
+
 
     // Extract available dates from slots
     // const availableDates = new Set(
@@ -42,16 +51,26 @@ const SingleRoomDetails = () => {
             const times = slotsData?.data?.
                 filter(
                     (slot: any) =>
-                        new Date(slot.date).toDateString() === selectedDate.toDateString() &&
+                        new Date(slot.date).toDateString() === selectedDate.toDateString()
+                        &&
                         slot?.room?._id === params?.id &&
                         !slot.isBooked
                 )
-                .map((slot: any) => `${slot.startTime} - ${slot.endTime}`);
+            //.map((slot: any) => `${slot.startTime} - ${slot.endTime}`);
             setAvailableTimes(times);
         } else {
             setAvailableTimes([]);
         }
     }, [selectedDate, slotsData?.data, params?.id]);
+
+    // Toggle slot selection (multiple selection)
+    const toggleTimeSlotSelection = (time: any) => {
+        setSelectedTimeSlotsId((prevSelected: any) =>
+            prevSelected?.includes(time?._id)
+                ? prevSelected.filter((id: any) => id !== time?._id) // Remove if already selected
+                : [...prevSelected, time?._id] // Add if not selected
+        );
+    };
 
 
     if (isLoading) {
@@ -91,10 +110,15 @@ const SingleRoomDetails = () => {
                         </div>
                         <div className="pl-3 mt-6 w-96 md:w-[300px] lg:w-[500px]">
                             <p className="text-xl w-96 md:w-[300px] lg:w-[500px] md:font-bold rounded-md">Amenities: {extractedAmenitiesFromArray}</p>
+                            <div className="hidden md:block mt-20">
+                                <p className="text-base font-bold">Selected Date: <span className="text-purple-700">{selectedDate?.toDateString()}</span></p>
+                                <p className="text-base font-bold">Selected Slots: <span className="text-purple-700">{slotsTimeToShowUser}</span></p>
+                            </div>
                         </div>
                     </div>
                     <div className="w-full md:w-full lg:w-1/2">
-                        <p className="text-center text-2xl font-bold">Available Slots</p>
+                        <p className="text-center text-2xl font-bold mb-3">Available Slots</p>
+                        <p className="text-center font-bold mb-10">(select date and available slots to book this room)</p>
 
                         <div>
                             <div className="flex flex-col items-center gap-4">
@@ -114,8 +138,8 @@ const SingleRoomDetails = () => {
                                         {availableTimes.length > 0 ? (
                                             <ul>
                                                 {availableTimes.map((time, index) => (
-                                                    <li key={index} className="p-2 bg-gray-200 rounded-md m-1">
-                                                        {time}
+                                                    <li key={index} className="p-2 bg-gray-200 rounded-md m-1 cursor-pointer" onClick={() => toggleTimeSlotSelection(time)}>
+                                                        {time.startTime} - {time.endTime}
                                                     </li>
                                                 ))}
                                             </ul>
@@ -124,6 +148,10 @@ const SingleRoomDetails = () => {
                                         )}
                                     </div>
                                 )}
+                                <div className="block md:hidden mt-7">
+                                    <p className="text-base font-bold">Selected Date: <span className="text-purple-700">{selectedDate?.toDateString()}</span></p>
+                                    <p className="text-base font-bold">Selected Slots: <span className="text-purple-700">{slotsTimeToShowUser}</span></p>
+                                </div>
                             </div>
                         </div>
                     </div>
