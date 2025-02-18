@@ -16,7 +16,7 @@ export const imgBBUploadImage = async (file: any) => {
 
     try {
         const response = await fetch(
-            `https://api.imgbb.com/1/upload?key=${process.env.IMGBB_API}`,
+            `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_IMGBB_API}`,
             {
                 method: "POST",
                 body: formData
