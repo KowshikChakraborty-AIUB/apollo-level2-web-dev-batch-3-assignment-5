@@ -9,6 +9,7 @@ import SingleRoomDetails from "@/pages/singleRoomDetails/SingleRoomDetails";
 import Login from "@/pages/login/Login";
 import SignUp from "@/pages/signUp/SignUp";
 import MyProfile from "@/pages/myProfile/MyProfile";
+import ManageUserProfile from "@/pages/manageUserProfile/ManageUserProfile";
 
 const router = createBrowserRouter([{
     path: '/',
@@ -46,6 +47,10 @@ const router = createBrowserRouter([{
         {
             path: '/userProfile',
             element: <MyProfile/>
+        },
+        {
+            path: '/manageUserProfile/:email',
+            element: <ManageUserProfile/>
         }
     ]
 }])

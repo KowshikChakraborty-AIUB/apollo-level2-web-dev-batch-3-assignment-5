@@ -46,7 +46,7 @@ const UserProfileComponent = () => {
                     <Link to={'/'}>
                         <Button className="text-center bg-yellow-400 text-black hover:bg-yellow-500 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300">Room Booking Lists</Button>
                     </Link>
-                    <Link to={'/'}>
+                    <Link to={`/manageUserProfile/${userDataFromState?.userEmail}`}>
                         <Button className="text-center bg-yellow-400 text-black hover:bg-yellow-500 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300">Update / Delete Profile</Button>
                     </Link>
                 </div>

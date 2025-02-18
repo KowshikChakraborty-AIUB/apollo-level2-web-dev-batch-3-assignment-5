@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { baseApi } from "../baseApi";
 
 const authApi = baseApi.injectEndpoints({
@@ -63,11 +64,32 @@ const authApi = baseApi.injectEndpoints({
             },
             providesTags: ["users"],
         }),
+        updateUserByEmailId: builder.mutation<void, { emailId: string, data: any }>({
+            query: ({ emailId, data }) => {
+                return {
+                    url: `/api/auth/updateUserProfile/${emailId}`,
+                    method: "PUT",
+                    body: data
+                };
+            },
+            invalidatesTags: ["users"],
+        }),
+        deleteUser: builder.mutation({
+            query: (id: string) => {
+                return {
+                    url: `/api/auth/deleteUser/${id}`,
+                    method: "PUT",
+                };
+            },
+            invalidatesTags: ["users"],
+        }),
     }),
 });
 
 export const {
     useLogInMutation,
     useSignUpMutation,
-    useGetUserByEmailIdQuery
+    useGetUserByEmailIdQuery,
+    useUpdateUserByEmailIdMutation,
+    useDeleteUserMutation
 } = authApi;
