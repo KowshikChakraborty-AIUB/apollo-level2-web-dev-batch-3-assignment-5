@@ -10,6 +10,7 @@ import Login from "@/pages/login/Login";
 import SignUp from "@/pages/signUp/SignUp";
 import MyProfile from "@/pages/myProfile/MyProfile";
 import ManageUserProfile from "@/pages/manageUserProfile/ManageUserProfile";
+import ChangeUserPassword from "@/pages/changeUserPassword/ChangeUserPassword";
 
 const router = createBrowserRouter([{
     path: '/',
@@ -51,6 +52,10 @@ const router = createBrowserRouter([{
         {
             path: '/manageUserProfile/:email',
             element: <ManageUserProfile/>
+        },
+        {
+            path: '/changeUserPassword',
+            element: <ChangeUserPassword/>
         }
     ]
 }])
