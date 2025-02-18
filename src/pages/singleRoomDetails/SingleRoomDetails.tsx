@@ -2,15 +2,23 @@
 import { Button } from "@/components/ui/button";
 import { useGetSingleRoomQuery } from "@/redux/api/roomsApi/roomsApi";
 import { useGetAvailableSlotsQuery } from "@/redux/api/slotsApi/slotsApi";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { DayPicker } from "react-day-picker";
 import "react-day-picker/dist/style.css";
+import { useAppSelector } from "@/redux/hook";
+import { useGetUserByEmailIdQuery } from "@/redux/api/authApi/authApi";
+import { useCreateBookingMutation } from "@/redux/api/bookingsApi/bookingsApi";
+import { toast } from "react-toastify";
 
 const SingleRoomDetails = () => {
+    const userEmailFromState = useAppSelector((state) => state.auth.user?.userEmail);
+    const { data: userData } = useGetUserByEmailIdQuery(userEmailFromState as string);
+
+    const [createBooking] = useCreateBookingMutation();
+
     const params = useParams();
     //console.log(params);
-
 
     const { data: singleRoomData, isLoading } = useGetSingleRoomQuery(params?.id);
 
@@ -23,8 +31,8 @@ const SingleRoomDetails = () => {
     const filteredSlotsTimeToShowUser = slotsData?.data?.filter((slot: any) => selectedTimeSlotsId.includes(slot._id));
     const slotsTimeToShowUser = filteredSlotsTimeToShowUser?.map((slot: any) => `${slot.startTime} - ${slot.endTime}`).join(", ");
 
-    console.log(selectedDate);
-    console.log(selectedTimeSlotsId);
+    //console.log(selectedDate);
+    //console.log(selectedTimeSlotsId);
 
 
 
@@ -84,6 +92,34 @@ const SingleRoomDetails = () => {
     }
 
     const extractedAmenitiesFromArray = singleRoomData.data.amenities.join(', ')
+
+    const handleRoomBookings = async (selectedDate: any, selectedTimeSlotsId: any) => {
+
+        try {
+
+            const payload = {
+                date: selectedDate ? selectedDate.toLocaleDateString("en-CA") : "", // en-CA is yyyy-mm-dd format.
+                slots: selectedTimeSlotsId?.length ? selectedTimeSlotsId : toast.error('Please select at least one time slot'),
+                room: params?.id,
+                user: userData?.data?._id,
+            }
+
+            //console.log(payload);
+
+            const res: any = await createBooking(payload);
+
+
+            if (res?.data?.success) {
+                toast.success(res?.data?.message);
+            }
+            if (res?.error) {
+                toast.error(res?.error?.message || res?.error?.data?.message || res?.data?.message);
+            }
+        } catch (error: any) {
+            toast.error(error?.message);
+        }
+
+    }
 
     return (
         <div>
@@ -157,9 +193,7 @@ const SingleRoomDetails = () => {
                     </div>
                 </div>
                 <div className="my-10 text-center">
-                    <Link to={'/bookings'}>
-                        <Button className="text-center bg-yellow-400 text-black hover:bg-yellow-500 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300">Book Now</Button>
-                    </Link>
+                    <Button onClick={() => handleRoomBookings(selectedDate, selectedTimeSlotsId)} className="text-center bg-yellow-400 text-black hover:bg-yellow-500 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300">Book Now</Button>
                 </div>
             </div>
         </div>
