@@ -4,13 +4,13 @@ const AdminSidebar = () => {
     return (
         <div>
             {/* dashboard sidebar */}
-            <div className="w-full md:w-64 md:h-screen bg-purple-200 md:fixed md:left-0 md:top-0">
+            <div className="w-full md:w-64 md:h-screen bg-purple-200 md:fixed md:left-0 md:top-0 md:overflow-y-auto">
                 <ul className="menu">
                     {
                         <>
                             <div className="dropdown flex items-center gap-0 md:gap-1">
                                 <div>
-                                    <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden text-purple-800 -ml-6">
+                                    <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden md:hidden text-purple-800 -ml-6">
                                         <svg
                                             xmlns="http://www.w3.org/2000/svg"
                                             className="h-5 w-5"
@@ -49,7 +49,9 @@ const AdminSidebar = () => {
                                         </li>
                                         <li>
                                             <details>
-                                                <summary>Parent</summary>
+                                                <summary className="flex items-center space-x-1">
+                                                    Parent
+                                                </summary>
                                                 <ul className="p-2">
                                                     <li><a>Submenu 1</a></li>
                                                     <li><a>Submenu 2</a></li>
@@ -58,11 +60,17 @@ const AdminSidebar = () => {
                                         </li>
                                     </ul>
                                 </div>
-                                <div className="ml-0 md:-ml-5 lg:ml-0">
-                                    <a className="text-2xl font-bold text-purple-700">MeetRoomHub.com</a>
+                                <div className="flex items-center md:items-start gap-2">
+                                    <img className="w-10 h-10 rounded-full" src="https://i.ibb.co.com/8B3yW05/Meet-Room-Hub-Logo.jpg" alt="" />
+
+                                    <p className="text-2xl font-bold text-purple-700">
+                                        MeetRoomHub
+                                        <br className="hidden md:block lg:block" />
+                                        <span>.com</span>
+                                    </p>
                                 </div>
                             </div>
-                            <div className="hidden lg:block">
+                            <div className="hidden lg:block md:block">
                                 <li>
                                     <Link to={'/adminDashboard'}>
                                         Dashboard
@@ -87,7 +95,9 @@ const AdminSidebar = () => {
                                 <ul>
                                     <li>
                                         <details>
-                                            <summary>Parent</summary>
+                                            <summary className="flex items-center space-x-1">
+                                                Parent
+                                            </summary>
                                             <ul className="p-2">
                                                 <li><a>Submenu 1</a></li>
                                                 <li><a>Submenu 2</a></li>

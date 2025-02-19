@@ -12,7 +12,8 @@ import MyProfile from "@/pages/myProfile/MyProfile";
 import ManageUserProfile from "@/pages/manageUserProfile/ManageUserProfile";
 import ChangeUserPassword from "@/pages/changeUserPassword/ChangeUserPassword";
 import AdminDashboardLayout from "@/layout/AdminDashboardLayout";
-import AdminDashboard from "@/pages/adminDashboard/adminDashboard";
+import AdminDashboard from "@/pages/adminDashboard/AdminDashboard";
+
 
 const router = createBrowserRouter([
     {
