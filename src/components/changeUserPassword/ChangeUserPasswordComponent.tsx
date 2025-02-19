@@ -1,4 +1,4 @@
-// /* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod"
@@ -14,6 +14,11 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import changeUserPasswordValidationSchema from "@/validationSchema/changeUserPasswordValidationSchema";
+import { useChangeUserPasswordMutation } from "@/redux/api/authApi/authApi";
+import { useAppDispatch } from "@/redux/hook";
+import { toast } from "react-toastify";
+import { logOut } from "@/redux/features/authSlice/authSlice";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const ChangeUserPasswordComponent = () => {
 
@@ -27,42 +32,45 @@ const ChangeUserPasswordComponent = () => {
         },
     })
 
-    //const [changeUserPassword, { isLoading }] = useChangeUserPasswordMutation()
+    const [changeUserPassword, { isLoading }] = useChangeUserPasswordMutation()
 
-    //const dispatch = useAppDispatch();
+    const dispatch = useAppDispatch();
+
+    const location = useLocation();
+    const navigate = useNavigate();
 
 
     const onSubmit = async (values: z.infer<typeof changeUserPasswordValidationSchema>) => {
         console.log(values);
 
-        // if (isLoading) {
-        //     return (
-        //         <>
-        //             <div className="flex items-center justify-center">
-        //                 <p className="ftext-5xl font-bold">Loading...</p>
-        //             </div>
-        //         </>
-        //     )
-        // }
+        if (isLoading) {
+            return (
+                <>
+                    <div className="flex items-center justify-center">
+                        <p className="ftext-5xl font-bold">Loading...</p>
+                    </div>
+                </>
+            )
+        }
 
-        // try {
-        //     const data = values?.body
-        //     const res: any = await changeUserPassword(data);
+        try {
+            const data = values?.body
+            const res: any = await changeUserPassword(data);
 
-        //     console.log(res);
+            console.log(res);
 
 
-        //     if (res?.data?.success) {
-        //         dispatch(logOut());
-        //         router.push('/login');
-        //         toast.success(res?.data?.message);
-        //     }
-        //     if (res?.error) {
-        //         toast.error(res?.error?.message || res?.error?.data?.message || res?.data?.message);
-        //     }
-        // } catch (error: any) {
-        //     toast.error(error?.message);
-        // }
+            if (res?.data?.success) {
+                dispatch(logOut());
+                navigate(location?.state ? location.state : '/login', { replace: true });
+                toast.success(res?.data?.message);
+            }
+            if (res?.error) {
+                toast.error(res?.error?.message || res?.error?.data?.message || res?.data?.message);
+            }
+        } catch (error: any) {
+            toast.error(error?.message);
+        }
     }
 
     return (

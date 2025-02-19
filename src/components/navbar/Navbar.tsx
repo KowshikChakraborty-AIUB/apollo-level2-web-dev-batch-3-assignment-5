@@ -2,7 +2,7 @@ import { Link, NavLink } from "react-router-dom"
 
 import {
     LayoutDashboardIcon,
-    LifeBuoy,
+    LockKeyholeIcon,
     LogOut,
     User,
 } from "lucide-react"
@@ -114,8 +114,10 @@ const Navbar = () => {
                                             </DropdownMenuGroup>
                                             <DropdownMenuSeparator />
                                             <DropdownMenuItem>
-                                                <LifeBuoy />
-                                                <span>Support</span>
+                                                <LockKeyholeIcon />
+                                                <Link to={'/changeUserPassword'}>
+                                                    <span>Change Password</span>
+                                                </Link>
                                             </DropdownMenuItem>
                                             <DropdownMenuSeparator />
                                             <Link to={'/login'} onClick={handleLogout}>
