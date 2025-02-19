@@ -11,53 +11,70 @@ import SignUp from "@/pages/signUp/SignUp";
 import MyProfile from "@/pages/myProfile/MyProfile";
 import ManageUserProfile from "@/pages/manageUserProfile/ManageUserProfile";
 import ChangeUserPassword from "@/pages/changeUserPassword/ChangeUserPassword";
+import AdminDashboardLayout from "@/layout/AdminDashboardLayout";
+import AdminDashboard from "@/pages/adminDashboard/adminDashboard";
 
-const router = createBrowserRouter([{
-    path: '/',
-    element: <App/>,
-    errorElement: <ErrorPage/>,
-    children: [
-        {
-            path: '/',
-            element: <Home/>
-        },
-        {
-            path: '/meetingRooms',
-            element: <MeetingRooms/>
-        },
-        {
-            path: '/singleRoomDetails/:id',
-            element: <SingleRoomDetails/>
-        },
-        {
-            path: '/aboutUs',
-            element: <AboutUs/>
-        },
-        {
-            path: '/contactUs',
-            element: <ContactUs/>
-        },
-        {
-            path: '/login',
-            element: <Login/>
-        },
-        {
-            path: '/signUp',
-            element: <SignUp/>
-        },
-        {
-            path: '/userProfile',
-            element: <MyProfile/>
-        },
-        {
-            path: '/manageUserProfile/:email',
-            element: <ManageUserProfile/>
-        },
-        {
-            path: '/changeUserPassword',
-            element: <ChangeUserPassword/>
-        }
-    ]
-}])
+const router = createBrowserRouter([
+    {
+        path: '/',
+        element: <App />,
+        errorElement: <ErrorPage />,
+        children: [
+            {
+                path: '/',
+                element: <Home />
+            },
+            {
+                path: '/meetingRooms',
+                element: <MeetingRooms />
+            },
+            {
+                path: '/singleRoomDetails/:id',
+                element: <SingleRoomDetails />
+            },
+            {
+                path: '/aboutUs',
+                element: <AboutUs />
+            },
+            {
+                path: '/contactUs',
+                element: <ContactUs />
+            },
+            {
+                path: '/login',
+                element: <Login />
+            },
+            {
+                path: '/signUp',
+                element: <SignUp />
+            },
+            {
+                path: '/userProfile',
+                element: <MyProfile />
+            },
+            {
+                path: '/manageUserProfile/:email',
+                element: <ManageUserProfile />
+            },
+            {
+                path: '/changeUserPassword',
+                element: <ChangeUserPassword />
+            }
+        ]
+    },
+
+    {
+        path: '/adminDashboard',
+        element: <AdminDashboardLayout/>,
+        errorElement: <ErrorPage/>,
+        children: [
+            {
+                path: '/adminDashboard',
+                element: <AdminDashboard/>
+            }
+        ]
+    }
+
+])
 
 export default router;
