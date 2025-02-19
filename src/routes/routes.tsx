@@ -13,6 +13,7 @@ import ManageUserProfile from "@/pages/manageUserProfile/ManageUserProfile";
 import ChangeUserPassword from "@/pages/changeUserPassword/ChangeUserPassword";
 import AdminDashboardLayout from "@/layout/AdminDashboardLayout";
 import AdminDashboard from "@/pages/adminDashboard/AdminDashboard";
+import AdminProfile from "@/pages/adminProfile/AdminProfile";
 
 
 const router = createBrowserRouter([
@@ -72,6 +73,10 @@ const router = createBrowserRouter([
             {
                 path: '/adminDashboard',
                 element: <AdminDashboard/>
+            },
+            {
+                path: '/adminDashboard/adminProfile',
+                element: <AdminProfile/>
             }
         ]
     }

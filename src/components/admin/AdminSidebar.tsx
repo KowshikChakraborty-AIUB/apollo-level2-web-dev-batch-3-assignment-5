@@ -33,7 +33,7 @@ const AdminSidebar = () => {
                                             </Link>
                                         </li>
                                         <li>
-                                            <Link to={'/userProfile'}>
+                                            <Link to={'/adminDashboard/adminProfile'}>
                                                 Profile
                                             </Link>
                                         </li>
@@ -77,7 +77,7 @@ const AdminSidebar = () => {
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link to={'/userProfile'}>
+                                    <Link to={'/adminDashboard/adminProfile'}>
                                         Profile
                                     </Link>
                                 </li>
