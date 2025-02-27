@@ -50,11 +50,11 @@ const AdminSidebar = () => {
                                         <li>
                                             <details>
                                                 <summary className="flex items-center space-x-1">
-                                                    Parent
+                                                    Rooms
                                                 </summary>
                                                 <ul className="p-2">
-                                                    <li><a>Submenu 1</a></li>
-                                                    <li><a>Submenu 2</a></li>
+                                                    <li><a>Create Rooms</a></li>
+                                                    <li><a>Manage Rooms</a></li>
                                                 </ul>
                                             </details>
                                         </li>
@@ -96,11 +96,11 @@ const AdminSidebar = () => {
                                     <li>
                                         <details>
                                             <summary className="flex items-center space-x-1">
-                                                Parent
+                                                Rooms
                                             </summary>
                                             <ul className="p-2">
-                                                <li><a>Submenu 1</a></li>
-                                                <li><a>Submenu 2</a></li>
+                                                <li><a>Create Rooms</a></li>
+                                                <li><a>Manage Rooms</a></li>
                                             </ul>
                                         </details>
                                     </li>

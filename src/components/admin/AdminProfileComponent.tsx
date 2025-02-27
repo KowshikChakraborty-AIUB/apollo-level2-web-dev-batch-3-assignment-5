@@ -9,7 +9,7 @@ const AdminProfileComponent = () => {
     return (
         <div className='w-full'>
             <p className='text-3xl font-bold pl-4'>Welcome, {currentLoggedInUser?.data?.name}</p>
-            <div className="bg-white shadow-2xl rounded-md">
+            <div className="bg-white shadow-2xl rounded-md md:h-screen">
                 <ul className="menu">
                     <li>
                         <div className="mx-auto text-base font-bold  mb-4 md:mb-0">
