@@ -49,6 +49,7 @@ const CreateRoomsComponent = () => {
 
         // //setting generated imgbb link to form value
         // values.profileImg = img
+        
 
         if (isLoading) {
             return (
@@ -61,7 +62,11 @@ const CreateRoomsComponent = () => {
         }
 
         try {
-            const res: any = await createRooms(values);
+            const data = values?.body
+            const res: any = await createRooms(data);
+
+            console.log(res);
+            
 
             if (res?.data?.success) {
                 //navigate(location?.state ? location.state : '/', { replace: true });
@@ -193,7 +198,7 @@ const CreateRoomsComponent = () => {
                                             <Input placeholder="Amenities" {...field} />
                                         </FormControl>
                                         <FormDescription>
-                                            Enter Available Amenities for The Room.
+                                        Enter the amenities separated by commas (e.g., Wi-Fi, Projector).
                                         </FormDescription>
                                         <FormMessage />
                                     </FormItem>

@@ -2,24 +2,28 @@ import { z } from 'zod';
 
 const meetingRoomValidationSchema = z.object({
     body: z.object({
-        name: z.string({
-            required_error: 'Name is required',
-        }),
-        roomNo: z.number({
-            required_error: 'Room No. is required',
-        }).transform((val) => Number(val)),
-        floorNo: z.number({
-            required_error: 'Floor No. is required',
-        }).transform((val) => Number(val)),
-        capacity: z.number({
-            required_error: 'Capacity is required',
-        }).transform((val) => Number(val)),
-        pricePerSlot: z.number({
-            required_error: 'Price per slot is required',
-        }).transform((val) => Number(val)),
-        amenities: z.array(z.string({
-            required_error: 'Amenities are required',
-        })),
+        name: z.string()
+            .min(1, 'Room name is required')
+            .max(50, 'Room name should not be longer than 50 characters'),
+        roomNo: z.string()
+            .min(1, 'Room No. is required')
+            .regex(/^[0-9]+$/, 'Must be number type')
+            .transform((val) => Number(val)),
+        floorNo: z.string()
+            .min(1, 'Floor No. is required')
+            .regex(/^[0-9]+$/, 'Must be number type')
+            .transform((val) => Number(val)),
+        capacity: z.string()
+            .min(1, 'Capacity is required')
+            .regex(/^[0-9]+$/, 'Must be number type')
+            .transform((val) => Number(val)),
+        pricePerSlot: z.string()
+            .min(1, 'Price Per Slot is required')
+            .regex(/^[0-9]+$/, 'Must be number type')
+            .transform((val) => Number(val)),
+        amenities: z.string()
+            .min(1, 'Amenities are required')
+            .transform((val) => val.split(',').map(item => item.trim())),
     }),
 });
 
