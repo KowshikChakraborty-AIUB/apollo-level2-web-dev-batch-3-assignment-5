@@ -56,7 +56,7 @@ const AdminSidebar = () => {
                                                 </summary>
                                                 <ul className="p-2">
                                                     <li><Link to={'/adminDashboard/createMeetingRooms'}>Create Rooms</Link></li>
-                                                    <li><a>Manage Rooms</a></li>
+                                                    <li><Link to={'/adminDashboard/manageMeetingRooms'}>Manage Rooms</Link></li>
                                                 </ul>
                                             </details>
                                         </li>
@@ -104,7 +104,7 @@ const AdminSidebar = () => {
                                             </summary>
                                             <ul className="p-2">
                                                 <li><Link to={'/adminDashboard/createMeetingRooms'}>Create Rooms</Link></li>
-                                                <li><a>Manage Rooms</a></li>
+                                                <li><Link to={'/adminDashboard/manageMeetingRooms'}>Manage Rooms</Link></li>
                                             </ul>
                                         </details>
                                     </li>

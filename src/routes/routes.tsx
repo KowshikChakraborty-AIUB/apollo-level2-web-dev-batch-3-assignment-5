@@ -15,6 +15,8 @@ import AdminDashboardLayout from "@/layout/AdminDashboardLayout";
 import AdminDashboard from "@/pages/adminDashboard/AdminDashboard";
 import AdminProfile from "@/pages/adminProfile/AdminProfile";
 import CreateMeetingRooms from "@/pages/createMeetingRooms/CreateMeetingRooms";
+import ManageRooms from "@/pages/manageRooms/ManageRooms";
+import UpdateMeetingRoom from "@/pages/updateMeetingRoom/UpdateMeetingRoom";
 
 
 const router = createBrowserRouter([
@@ -82,6 +84,14 @@ const router = createBrowserRouter([
             {
                 path: '/adminDashboard/createMeetingRooms',
                 element: <CreateMeetingRooms/>
+            },
+            {
+                path: '/adminDashboard/manageMeetingRooms',
+                element: <ManageRooms/>
+            },
+            {
+                path: '/adminDashboard/updateMeetingRoom/:id',
+                element: <UpdateMeetingRoom/>
             }
         ]
     }
