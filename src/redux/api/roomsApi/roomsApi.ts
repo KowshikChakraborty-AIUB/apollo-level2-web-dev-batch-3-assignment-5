@@ -23,10 +23,23 @@ const roomsApi = baseApi.injectEndpoints({
             },
             providesTags: ["rooms"],
         }),
+
+        //create meeting rooms
+        createRooms: builder.mutation({
+            query: (data) => {
+                return {
+                    url: "/api/rooms",
+                    method: "POST",
+                    body: data,
+                };
+            },
+            invalidatesTags: ["rooms"],
+        }),
     }),
 });
 
 export const {
     useGetAllRoomsQuery,
-    useGetSingleRoomQuery
+    useGetSingleRoomQuery,
+    useCreateRoomsMutation,
 } = roomsApi;

@@ -50,10 +50,12 @@ const AdminSidebar = () => {
                                         <li>
                                             <details>
                                                 <summary className="flex items-center space-x-1">
-                                                    Rooms
+                                                    <Link to={'/adminDashboard/createMeetingRooms'}>
+                                                        Rooms
+                                                    </Link>
                                                 </summary>
                                                 <ul className="p-2">
-                                                    <li><a>Create Rooms</a></li>
+                                                    <li><Link to={'/adminDashboard/createMeetingRooms'}>Create Rooms</Link></li>
                                                     <li><a>Manage Rooms</a></li>
                                                 </ul>
                                             </details>
@@ -96,10 +98,12 @@ const AdminSidebar = () => {
                                     <li>
                                         <details>
                                             <summary className="flex items-center space-x-1">
-                                                Rooms
+                                                <Link to={'/adminDashboard/createMeetingRooms'}>
+                                                    Rooms
+                                                </Link>
                                             </summary>
                                             <ul className="p-2">
-                                                <li><a>Create Rooms</a></li>
+                                                <li><Link to={'/adminDashboard/createMeetingRooms'}>Create Rooms</Link></li>
                                                 <li><a>Manage Rooms</a></li>
                                             </ul>
                                         </details>
